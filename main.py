@@ -39,4 +39,50 @@ st.text_input("이 그래프로 알 수 있는 것", key="note1")
 
 st.divider()
 # 앞으로 그래프를 계속 추가할 구역
-st.header("2. (다음 그래프를 여기에 추가)")
+st.header("2. (다음 그래프를 여기에 추가)")# =================================
+# ② 장르 안에 영화가 들어 있는 트리맵
+# =================================
+st.subheader("② 장르 안에 들어 있는 영화 🎬")
+
+fig2 = px.treemap(
+    df,
+    path=["genre_main", "movieNm"],
+    values="total_audi",
+)
+
+fig2.update_traces(
+    hovertemplate=(
+        "<b>%{label}</b><br>"
+        "총 관객: %{value:,.0f}명"
+        "<extra></extra>"
+    )
+)
+
+fig2.update_layout(
+    height=650,
+    margin=dict(
+        t=30,
+        b=20,
+        l=10,
+        r=10
+    )
+)
+
+st.plotly_chart(
+    fig2,
+    use_container_width=True
+)
+
+
+# ---------------------------------
+# ② 이 그래프로 알 수 있는 것
+# ---------------------------------
+with st.container(border=True):
+    st.markdown("### 💡 이 그래프로 알 수 있는 것")
+
+    st.write(
+        "장르별로 어떤 영화들이 포함되어 있는지와 "
+        "영화별 총 관객 규모의 차이를 한눈에 비교할 수 있습니다."
+    )
+
+st.divider()
